@@ -18,8 +18,8 @@ class RAdam(Optimizer):
         if isinstance(params, (list, tuple)) and len(params) > 0 and isinstance(params[0], dict):
             for param in params:
                 if 'betas' in param and (param['betas'][0] != betas[0] or param['betas'][1] != betas[1]):
-                    param['buffer'] = [[None, None, None] for _ in range(10)]
-        defaults = dict(lr=lr, betas=betas, eps=eps, weight_decay=weight_decay, buffer=[[None, None, None] for _ in range(10)])
+                    param['buffer'] = [[0, 0, 0] for _ in range(10)]
+        defaults = dict(lr=lr, betas=betas, eps=eps, weight_decay=weight_decay, buffer=[[0, 0, 0] for _ in range(10)])
         super(RAdam, self).__init__(params, defaults)
 
     def __setstate__(self, state):
